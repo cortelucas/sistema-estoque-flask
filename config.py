@@ -8,3 +8,10 @@ class Config(object):
   ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
   APP = None
 
+class DevelopmentConfig(Config):
+  TESTING = True
+  DEBUG = True
+  IP_HOST = 'localhost'
+  PORT_HOST = '8000'
+  URL_MAIN = f'http://{IP_HOST}:{PORT_HOST}'
+
