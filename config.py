@@ -1,6 +1,7 @@
 import os
 import random, string
 
+
 class Config(object):
   CSRF_ENABLED = True
   SECRET = "61926647da9b58e9f996ba2557da19500aec84cad4bc358e137ee2ffb8ac4d87"
@@ -8,10 +9,34 @@ class Config(object):
   ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
   APP = None
 
+
 class DevelopmentConfig(Config):
   TESTING = True
   DEBUG = True
   IP_HOST = 'localhost'
-  PORT_HOST = '8000'
+  PORT_HOST = 8000
   URL_MAIN = f'http://{IP_HOST}:{PORT_HOST}'
 
+
+class TestingConfig(Config):
+  TESTING = True
+  DEBUG = True
+  IP_HOST = 'localhost'
+  PORT_HOST = 5000
+  URL_MAIN = f'http://{IP_HOST}:{PORT_HOST}'
+
+
+class ProductionConfig(Config):
+  DEBUG = False
+  IP_HOST = 'localhost'
+  PORT_HOST = 8080
+  URL_MAIN = f'http://{IP_HOST}:{PORT_HOST}'
+
+
+app_config = {
+  'development': DevelopmentConfig(),
+  'testing': TestingConfig(),
+  'production': ProductionConfig()
+}
+
+app_active = os.getenv('FLASK_ENV')
